@@ -16,10 +16,11 @@ class SampleDataImport implements ToArray
     {
         $importationWord = "IMPORTATION DES PRODUITS";
         $exportationWord = "EXPORTATION DES PRODUITS";
+        $anneeWord = "ANNEES";
+        
         $isImportationSection = false;
         $isExportationSection = false;
 
-        $anneeWord = "ANNEES";
         $annees = [];
 
         for ($i = 0; $i < count($data); $i++) {
