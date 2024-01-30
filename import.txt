@@ -1,0 +1,239 @@
+TEST 1
+
+// public function array(array $data)
+    // {
+    //     foreach ($data as $produit) {
+
+    //         // dd($produit);
+    //         $valeur_caf=$produit['valeur_caf'];
+    //         $libelle=$produit['libelle'];
+    //         $poids_net=$produit['poids_net'];
+    //         $code = $produit['code'];
+
+
+
+    //         if($code!=null){
+
+    //           if($libelle==null){
+    //             $libelle="";
+    //           }
+    //             if ($poids_net == null) {
+    //                 $poids_net = 0;
+    //             }
+    //             if ($valeur_caf == null) {
+    //                 $valeur_caf = 0;
+    //             }
+    //         Produit::create([
+    //             'code' => $code,
+    //             'libelle' => $libelle,
+    //             'valeur_caf' => $valeur_caf,
+    //             'poids_net' => $poids_net,
+    //         ]);
+
+    //             }
+    //     }
+    // }
+
+
+TEST 2
+
+// $annees = [];
+
+    // Boucle pour obtenir le resultat attendu de l'année
+    // for ($i = 2; $i < count($data[0]); $i += 2) {
+    //     $annees[] = $data[0][$i];
+    // }
+    //         // Traitement lignes de données
+    //         for ($i = 2; $i < count($data); $i++) {
+    //             $dataP = $data[$i];
+    //             $code = $data[$i][0];
+    //             $libelle = $data[$i][1];
+
+    //             // Boucle sur les paires de valeurs pour les années suivantes
+    //             for ($j = 2, $z = 0; $j < count($data[0]); $j += 2, $z++) {
+    //                 $valeur_caf = $data[$i][$j];
+    //                 $poids_net = $data[$i][$j + 1];
+    //                 $annee = $annees[$z];
+    //                 // Verifier si le code est vide
+    //                 if (empty($code)) {
+    //                     continue; // Ignorer les lignes vides
+    //                 }
+
+    //                 // Verifier si le code existe déjà dans la base de données
+    //                 $codeExiste = Produit::where('code', $code)->exists();
+
+    //                 if (!$codeExiste) {
+
+    //                     // Verification des valeurs non null et donner valeur par defaut
+    //                     // if ($code != null) {
+
+    //                     if ($libelle == null) {
+    //                         $libelle = ""; # Valeur par défaut
+    //                     }
+    //                     if ($poids_net == null) {
+    //                         $poids_net = 0;
+    //                     }
+    //                     if ($valeur_caf == null) {
+    //                         $valeur_caf = 0;
+    //                     }
+
+    //                     // Enregistrement des données dans la tables produits
+    //                     try {
+    //                         Produit::create([
+    //                             'code' => $code,
+    //                             'libelle' => $libelle,
+    //                             'annee' => $annee,
+    //                             'valeur_caf' => $valeur_caf,
+    //                             'poids_net' => $poids_net,
+    //                         ]);
+    //                         echo ('valider');
+    //                     } catch (\Exception $e) {
+    //                         \Log::error("Erreur lors de la création de l'enregistrement : " . $e->getMessage);
+    //                     }
+    //                     // }
+    //                 } else {
+    //                     echo ("Le produit est déjà enregistrer dans la base de données");
+    //                 }
+    //             }
+    //         }
+
+
+TEST 3
+
+    // Parcourir les lignes du tableau
+    // foreach ($data as $row) {
+
+    //     if ($row != null) {
+    //         dump($row);
+    //     }
+
+    //     // Vérifier si la ligne contient le mot-clé  importation
+    //     if (strpos($row[0], $importationWord) !== false) {
+    //         $isImportationSection = true;
+    //         continue;
+    //     }
+
+
+
+    //     // Vérifier si la ligne contient le mot-clé exportation
+    //     if (strpos($row[0], $exportationWord) !== false) {
+    //         $isExportationSection = true;
+    //         $isImportationSection = false;
+    //         continue;
+    //     }
+
+    // Si nous sommes dans la section d'importation, afficher les données
+    // if ($isImportationSection) {
+    //     // Vérifier si la ligne ne pas vide
+    //     if ($row[0] != null) {
+    //         // Afficher la ligne de données
+    //         for ($i = 2; $i < count($row); $i += 2) {
+    //             $annees[] = $row[$i];
+    //         }
+
+    //         // $annees[] = $row[0];
+    //         // dump($annees);
+    //     }
+    // }
+
+    // Si nous sommes dans la section d'importation ou d'exportation, récupérer les années
+    // if ($isImportationSection || $isExportationSection) {
+    //     if (is_numeric($row[0])) { // Vérifier si la première colonne est numérique (supposant que ce soit l'année)
+    //         $annees[] = $row[0];
+    //     }
+    // }
+    // }
+
+
+TEST 4
+
+
+public function array(array $data)
+    {
+
+        /**
+         *  Ignorer les lignes vides
+         *  Reperer le texte "IMPORTATION DES PRODUITS " pour entrer dans la base d'importation
+         *  Reperer le texte "EXPORTATION DES PRODUITS " pour entrer dans la base d'exportation
+         *
+         *  Première boucle pour obtenir le resultat de l'année en incrementant par 2 ($i = 2; $i < count($data[0]); $i += 2)
+         *  Deuxième boucle pour compter les nombres des lignes dans le tableau ($i = 0; $i < count($data); $i++)
+         *  Troisième boucle pour compter le nombre de collone dans le tableau  ($j = 0; $j < count($data[$i]) - 1; $j++)
+         */
+
+        $importationWord = "IMPORTATION DES PRODUITS";
+        $exportationWord = "EXPORTATION DES PRODUITS";
+        $annee = "ANNEES";
+
+        $isImportationSection = false;
+        $isExportationSection = false;
+        $exp = 0;
+
+        $annees = [];
+        // Boucle pour compter le nombre de ligne dans le tableau
+        for ($i = 0; $i < count($data); $i++) {
+
+            // Boucle pour compter le nombre de collone dans le tableau
+            for ($j = 0; $j < count($data[$i]) - 1; $j++) {
+
+                if ($data[$i][0] != null) {
+
+                    /**
+                     *  Vérifier si la ligne contient le mot-clé Annee
+                     *  Si OUI: Faire une boucle pour obtenir l'anneé en question
+                     */
+                    if (strpos($data[$i][$j], $annee) !== false) {
+                        for ($k = 2; $k < count($data[$i]); $k += 2) {
+                            $annees[] = $data[$i][$k];
+                        }
+                    }
+
+                    // Vérifier si la ligne contient le mot-clé  importation
+                    if (strpos($data[$i][$j], $importationWord) !== false) {
+                        $isImportationSection = true;
+                        echo 'Data importation...';
+
+                        if ($isImportationSection) {
+
+                            dump($data[$i][$j]);
+                        }
+                    }
+
+                    // Vérifier si la ligne contient le mot-clé  exportation
+                    if (strpos($data[$i][$j], $exportationWord) !== false) {
+                        $isExportationSection = true;
+                        echo 'Data exportation...';
+                        $exp = $i;
+                    }
+                }
+            }
+        }
+
+
+        if ($isExportationSection) {
+
+            
+            
+            // Si nous sommes dans la section d'exportation, afficher les données
+            for ($i = $exp; $i < (count($data)); $i++) {
+
+                $nbrColone = count($data[$i]);
+
+                for ($c = 0; $c < $nbrColone; $c++) {
+
+                    $col = $data[$i][$c];
+                    print_r($col . ' ');
+
+                    // if ($col != null) {
+                    // dump($col);
+                    // if (strpos($col, $annee) !== false) {
+                    //     for ($k = 2; $k < count($data[$i]); $k += 2) {
+                    //         $annees[] = $data[$i][$k];
+                    //     }
+                    // }
+                    // dump($annees);
+                    // }
+                }
+            }
+        }
+    }
